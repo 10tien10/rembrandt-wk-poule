@@ -7,13 +7,16 @@
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --rood: #C8102E;
-    --goud: #F5C518;
-    --donker: #1a1a1a;
-    --donker2: #2a2a2a;
-    --licht: #f5f0e8;
+    --rood: #8B1A1A;
+    --rood2: #C8102E;
+    --goud: #D4A017;
+    --goud2: #F5C518;
+    --bruin: #6B3A2A;
+    --donker: #1a1208;
+    --donker2: #241a0e;
+    --licht: #f5efd8;
     --wit: #ffffff;
-    --grijs: #888;
+    --grijs: #9a8e7a;
     --groen: #2d8a4e;
   }
 
@@ -29,21 +32,28 @@
   /* HEADER */
   .header {
     background: var(--donker2);
-    border-bottom: 3px solid var(--goud);
-    padding: 16px 20px;
+    border-bottom: 3px solid var(--bruin);
+    padding: 12px 20px;
     text-align: center;
     position: sticky;
     top: 0;
     z-index: 100;
   }
+  .header-logo {
+    height: 64px;
+    width: auto;
+    display: block;
+    margin: 0 auto 6px;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+  }
   .header h1 {
     font-family: 'Oswald', sans-serif;
-    font-size: 1.4rem;
+    font-size: 1.3rem;
     color: var(--goud);
-    letter-spacing: 2px;
+    letter-spacing: 3px;
     text-transform: uppercase;
   }
-  .header p { font-size: 0.8rem; color: var(--grijs); margin-top: 2px; }
+  .header p { font-size: 0.75rem; color: var(--grijs); margin-top: 2px; }
 
   /* NAV TABS */
   .nav {
@@ -68,8 +78,8 @@
     transition: all 0.2s;
   }
   .nav button.active {
-    color: var(--goud);
-    border-bottom-color: var(--goud);
+    color: var(--goud2);
+    border-bottom-color: var(--goud2);
   }
   .nav button:hover { color: var(--licht); }
 
@@ -186,7 +196,7 @@
     display: block;
     width: 100%;
     padding: 14px;
-    background: var(--rood);
+    background: var(--rood2);
     color: var(--wit);
     border: none;
     border-radius: 8px;
@@ -198,7 +208,7 @@
     transition: background 0.2s, transform 0.1s;
     margin-top: 16px;
   }
-  .btn:hover { background: #a50d25; }
+  .btn:hover { background: var(--rood); }
   .btn:active { transform: scale(0.98); }
   .btn:disabled { background: #444; cursor: not-allowed; }
   .btn-gold {
@@ -418,12 +428,53 @@
   /* STAP PAGINA */
   .stap-pagina { display: none; }
   .stap-pagina.active { display: block; }
+
+  /* RONDE SECTIES */
+  .ronde-sectie {
+    border: 1px solid #3a2a1a;
+    border-radius: 8px;
+    padding: 14px;
+    margin: 12px 0;
+    background: #1e140a;
+  }
+  .ronde-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  .ronde-icon { font-size: 1.4rem; flex-shrink: 0; margin-top: 2px; }
+  .ronde-titel {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--goud2);
+    margin-bottom: 4px;
+  }
+  .ronde-uitleg {
+    font-size: 0.82rem;
+    color: var(--grijs);
+    line-height: 1.5;
+  }
+  .ronde-uitleg strong { color: var(--licht); }
+  .pnt-badge {
+    display: inline-block;
+    background: var(--rood);
+    color: var(--wit);
+    padding: 1px 7px;
+    border-radius: 10px;
+    font-size: 0.75rem;
+    font-family: 'Oswald', sans-serif;
+    letter-spacing: 0.5px;
+  }
 </style>
 </head>
 <body>
 
 <div class="header">
-  <h1>⚽ Rembrandt WK Poule 2026</h1>
+  <img src="images/logo.png" alt="Rembrandt Pub" class="header-logo" onerror="this.style.display='none'">
+  <h1>WK POULE 2026</h1>
   <p>Vul je voorspellingen in voor het WK!</p>
 </div>
 
@@ -514,27 +565,76 @@
     <div class="card">
       <h2>🏆 Doorgestroomde landen</h2>
       <div class="info-box">
-        Vul de landen in die je verwacht dat doorstromen naar elke ronde.
+        Welke landen komen er door naar elke ronde van het toernooi?<br>
+        Kies per ronde de landen die jij verwacht. Hoe verder een land komt dat jij goed voorspeld hebt, hoe meer punten!
       </div>
       <div id="alert-rondes" class="alert"></div>
 
-      <h3>🔵 16e Finales — 32 landen (15 pnt)</h3>
-      <div class="landen-grid" id="r16-grid"></div>
+      <div class="ronde-sectie">
+        <div class="ronde-header">
+          <span class="ronde-icon">🔵</span>
+          <div>
+            <div class="ronde-titel">16e Finales</div>
+            <div class="ronde-uitleg">Welke <strong>32 landen</strong> komen door uit de groepsfase? Kies hieronder 32 landen. <span class="pnt-badge">15 pnt per land</span></div>
+          </div>
+        </div>
+        <div class="landen-grid" id="r16-grid"></div>
+      </div>
 
-      <h3>🟡 8e Finales — 16 landen (25 pnt)</h3>
-      <div class="landen-grid" id="r8-grid"></div>
+      <div class="ronde-sectie">
+        <div class="ronde-header">
+          <span class="ronde-icon">🟡</span>
+          <div>
+            <div class="ronde-titel">8e Finales</div>
+            <div class="ronde-uitleg">Welke <strong>16 landen</strong> winnen de 16e finale en gaan door? <span class="pnt-badge">25 pnt per land</span></div>
+          </div>
+        </div>
+        <div class="landen-grid" id="r8-grid"></div>
+      </div>
 
-      <h3>🟠 Kwartfinales — 8 landen (50 pnt)</h3>
-      <div class="landen-grid" id="kw-grid"></div>
+      <div class="ronde-sectie">
+        <div class="ronde-header">
+          <span class="ronde-icon">🟠</span>
+          <div>
+            <div class="ronde-titel">Kwartfinales</div>
+            <div class="ronde-uitleg">Welke <strong>8 landen</strong> bereiken de kwartfinale? <span class="pnt-badge">50 pnt per land</span></div>
+          </div>
+        </div>
+        <div class="landen-grid" id="kw-grid"></div>
+      </div>
 
-      <h3>🔴 Halve Finales — 4 landen (100 pnt)</h3>
-      <div class="landen-grid" id="hf-grid"></div>
+      <div class="ronde-sectie">
+        <div class="ronde-header">
+          <span class="ronde-icon">🔴</span>
+          <div>
+            <div class="ronde-titel">Halve Finales</div>
+            <div class="ronde-uitleg">Welke <strong>4 landen</strong> spelen de halve finale? <span class="pnt-badge">100 pnt per land</span></div>
+          </div>
+        </div>
+        <div class="landen-grid" id="hf-grid"></div>
+      </div>
 
-      <h3>⭐ Finale — 2 landen (150 pnt)</h3>
-      <div class="landen-grid" id="fin-grid"></div>
+      <div class="ronde-sectie">
+        <div class="ronde-header">
+          <span class="ronde-icon">⭐</span>
+          <div>
+            <div class="ronde-titel">Finale</div>
+            <div class="ronde-uitleg">Welke <strong>2 landen</strong> spelen de finale? <span class="pnt-badge">150 pnt per land</span></div>
+          </div>
+        </div>
+        <div class="landen-grid" id="fin-grid"></div>
+      </div>
 
-      <h3>🥇 Winnaar (200 pnt)</h3>
-      <div class="landen-grid" id="win-grid"></div>
+      <div class="ronde-sectie">
+        <div class="ronde-header">
+          <span class="ronde-icon">🥇</span>
+          <div>
+            <div class="ronde-titel">Wereldkampioen</div>
+            <div class="ronde-uitleg">Welk land wordt <strong>wereldkampioen</strong>? <span class="pnt-badge">200 pnt</span></div>
+          </div>
+        </div>
+        <div class="landen-grid" id="win-grid"></div>
+      </div>
 
       <div style="display:flex; gap:8px; margin-top:16px;">
         <button class="btn" style="background:#333; flex:1" onclick="naarStap(2)">← Terug</button>
@@ -749,29 +849,49 @@ function naarStap3() {
   renderRondes();
 }
 
+const LANDEN = [
+  'ALGERIJE','ARGENTINIË','AUSTRALIË','BELGIË','BOSNIË EN HERZ.',
+  'BRAZILIË','CANADA','COLOMBIA','CONGO','CURAÇAO',
+  'DUITSLAND','ECUADOR','EGYPTE','ENGELAND','FRANKRIJK',
+  'GHANA','HAÏTI','IRAN','IRAK','IVOORKUST',
+  'JAPAN','JORDANIË','KAAPVERDIË','KROATIË','MAROKKO',
+  'MEXICO','NEDERLAND','NIEUW-ZEELAND','NOORWEGEN','OEZBEKISTAN',
+  'OOSTENRIJK','PANAMA','PARAGUAY','PORTUGAL','QATAR',
+  'SAOEDI-ARABIË','SCHOTLAND','SENEGAL','SPANJE','TSJECHIË',
+  'TUNESIË','TURKIJE','URUGUAY','VERENIGDE STATEN','ZWEDEN',
+  'ZWITSERLAND','ZUID-AFRIKA','ZUID-KOREA'
+].sort();
+
+function maakDropdown(id, placeholder) {
+  let html = `<select id="${id}" style="width:100%;background:#111;border:1px solid #444;border-radius:6px;color:var(--licht);padding:8px 10px;font-size:0.85rem;font-family:'Source Sans 3',sans-serif;">`;
+  html += `<option value="">— ${placeholder} —</option>`;
+  LANDEN.forEach(l => { html += `<option value="${l}">${l}</option>`; });
+  html += '</select>';
+  return html;
+}
+
 function renderRondes() {
   const configs = [
-    { id: 'r16-grid', prefix: 'r16_', count: 32 },
-    { id: 'r8-grid', prefix: 'r8_', count: 16 },
-    { id: 'kw-grid', prefix: 'kw', count: 8 },
-    { id: 'hf-grid', prefix: 'hf', count: 4 },
-    { id: 'fin-grid', prefix: 'fin', count: 2 },
-    { id: 'win-grid', prefix: 'win_', count: 1 },
+    { id: 'r16-grid', prefix: 'r16_', count: 32, label: 'Kies land' },
+    { id: 'r8-grid',  prefix: 'r8_',  count: 16, label: 'Kies land' },
+    { id: 'kw-grid',  prefix: 'kw',   count: 8,  label: 'Kies land' },
+    { id: 'hf-grid',  prefix: 'hf',   count: 4,  label: 'Kies land' },
+    { id: 'fin-grid', prefix: 'fin',  count: 2,  label: 'Kies finalist' },
   ];
   configs.forEach(c => {
     const grid = document.getElementById(c.id);
     if (!grid) return;
     let html = '';
     for (let i = 1; i <= c.count; i++) {
-      html += `<input type="text" id="${c.prefix}${i}" placeholder="Land ${i}">`;
+      html += maakDropdown(c.prefix + i, c.label);
     }
     grid.innerHTML = html;
   });
-  // Winnaar apart (1 kolom)
+  // Winnaar apart (1 kolom, volle breedte)
   const winGrid = document.getElementById('win-grid');
   if (winGrid) {
     winGrid.style.gridTemplateColumns = '1fr';
-    winGrid.innerHTML = `<input type="text" id="winnaar" placeholder="Winnend land" style="font-size:1.1rem; font-weight:700;">`;
+    winGrid.innerHTML = maakDropdown('winnaar', 'Kies de winnaar');
   }
 }
 
@@ -795,11 +915,13 @@ async function laadBonusvragen() {
 function renderBonus() {
   const container = document.getElementById('bonus-container');
   let html = '';
-  bonusvragen.forEach(v => {
+  bonusvragen.forEach((v, i) => {
+    const id  = v.ID   || v.id   || (i + 1);
+    const vraag = v.Vraag || v.vraag || v.VRAAG || '';
     html += `
       <div class="bonus-item">
-        <div class="bonus-vraag">${v.id}. ${v.vraag}</div>
-        <input type="text" id="b${v.id}" placeholder="Jouw antwoord">
+        <div class="bonus-vraag">Vraag ${id}: ${vraag}</div>
+        <input type="text" id="b${id}" placeholder="Jouw antwoord...">
       </div>`;
   });
   container.innerHTML = html;
@@ -850,9 +972,10 @@ async function verstuurVoorspelling() {
   data['winnaar'] = winEl ? winEl.value.trim() : '';
 
   // Bonus
-  bonusvragen.forEach(v => {
-    const el = document.getElementById('b' + v.id);
-    data['b' + v.id] = el ? el.value.trim() : '';
+  bonusvragen.forEach((v, i) => {
+    const id = v.ID || v.id || (i + 1);
+    const el = document.getElementById('b' + id);
+    data['b' + id] = el ? el.value.trim() : '';
   });
 
   try {
